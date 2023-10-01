@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# displays Best School 10 times.
+
+i=1
+#!/usr/bin/python3
+while [ "$i" -lt 11 ]
+do
+	if [ "$i" -eq 9 ]
+	then
+		echo "Best School"
+		echo "Hi"
+		(( i++ ))
+		continue
+	fi
+	echo "Best School"
+	(( i++ ))
+done	
