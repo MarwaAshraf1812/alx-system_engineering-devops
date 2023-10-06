@@ -2,3 +2,4 @@
 #Bash script that displays listening ports
 
 netstat -l --program
+
