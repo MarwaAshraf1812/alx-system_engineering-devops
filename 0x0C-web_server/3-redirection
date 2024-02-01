@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-#Configure your Nginx server so that /redirect_me is redirecting to another page.
-
-REDIRECT="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
-
-ssudo apt-get update
-sudo apt-get install -y nginx
+# Configures a new ubuntu machine by installing
+# Nginx where it should be listening on port 80
+# Serve a page that would return a Hello World string
 
 sudo service nginx start
 
@@ -13,8 +10,14 @@ sudo ufw allow 'Nginx HTTP'
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
-sudo echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
 
-sudo sed -i "/location \/ {/a $REDIRECT" /etc/nginx/sites-available/default
+sudo sed -i '24i\    rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
 
-sudo service nginx restart
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
+sudo nginx -t
+
+sudo service nginx reload
+
+echo "Nginx configuration completed successfully!"
