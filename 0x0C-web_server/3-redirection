@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
-# Configures a new ubuntu machine by installing
-# Nginx where it should be listening on port 80
-# Serve a page that would return a Hello World string
 
-sudo service nginx start
+sudo apt-get update
 
-sudo ufw allow 'Nginx HTTP'
+sudo apt-get install -y nginx
 
-sudo chown -R "$USER":"$USER" /var/www/html
-sudo chmod -R 755 /var/www
+sudo bash -c "cat > /etc/nginx/sites-available/default" <<EOL
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+    server_name _;
 
-echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
+    location / {
+        add_header X-Served-By \$(hostname);
+        # Additional Nginx configuration if needed
+    }
+}
+EOL
 
-sudo sed -i '24i\       rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+sudo systemctl reload nginx
 
-sudo service nginx restart
 
-echo -e "\nCompleted.\n"
+echo "Configuration completed."
