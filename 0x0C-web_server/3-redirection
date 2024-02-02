@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Configures a new ubuntu machine by installing
+# Configures a new Ubuntu machine by installing
 # Nginx where it should be listening on port 80
 # Serve a page that would return a Hello World string
 
@@ -14,9 +14,7 @@ cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.b
 
 echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
 
-
-sudo sed -i '24i\       rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-
+sudo echo -e "location /redirect_me {\n    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n}" | sudo tee -a /etc/nginx/sites-available/default > /dev/null
 
 sudo service nginx restart
 
