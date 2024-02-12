@@ -1,0 +1,4 @@
+some information for task 1
+>>> apache may interfere with nginx so kill the process if it is running and check if the appache still running or not
+
+>>> chmod 644 : give owner permissions to read and write to the config file
