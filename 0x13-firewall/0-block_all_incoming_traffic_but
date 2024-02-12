@@ -1,0 +1,24 @@
+# Update package list to make sure we have the latest information
+echo -e "Updating\n"
+sudo apt-get update
+
+# Install ufw if not already installed
+echo -e "Installing\n"
+sudo apt install ufw -y
+
+# Allow Outgoing and Deny Incoming
+echo -e "\nAllow outgoing traffic...\nDeny incoming traffic..."
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# Allow SSH (ports: 22, 443, 80) for remote connections
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+
+# Enable ufw to apply the rules
+sudo ufw enable
+
+sudo ufw status
+
+echo -e "Completed.\n"
