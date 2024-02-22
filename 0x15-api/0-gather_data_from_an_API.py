@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Gather employee data from API"""
 
+import json
 import requests
 import sys
-import json
 
 if __name__ == "__main__":
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
         if com_tasks['completed']:
             total_tasks += 1
 
-    print("Employee {} is done with tasks ({}/ {})".format(e_name,
+    print("Employee {} is done with tasks({}/{}):".format(e_name,
                                                            total_tasks,
                                                            len(json_)))
 
