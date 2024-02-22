@@ -36,9 +36,8 @@ if __name__ == "__main__":
         if com_tasks['completed']:
             total_tasks += 1
 
-    print("Employee {} is done with tasks({}/{}):".format(e_name,
-                                                           total_tasks,
-                                                           len(json_)))
+    print("Employee {} is done with tasks({}/{}):".
+          format(e_name, total_tasks, len(json_)))
 
     # Print the titles of completed tasks
     for com_tasks in json_:
