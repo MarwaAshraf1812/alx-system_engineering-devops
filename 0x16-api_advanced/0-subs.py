@@ -11,18 +11,9 @@ def number_of_subscribers(subreddit):
     # Set a custom User-Agent header to avoid Too Many Requests issues
     headers = {"User-Agent": "My-User-Agent"}
 
-    try:
-        sub_info = requests.get(url, headers=headers, allow_redirects=False)
+    sub_info = requests.get(url, headers=headers, allow_redirects=False)
 
-        if sub_info.status_code == 404:
-            return 0
-
-        # Parse the JSON response and extract the number of subscribers
-        data = sub_info.json().get("data")
-        if data and "subscribers" in data:
-            return data["subscribers"]
-        else:
-            return 0
-
-    except requests.RequestException:
+    if sub_info.status_code >= 300:
         return 0
+
+    return sub_info.json().get("data").get("subscribers")
