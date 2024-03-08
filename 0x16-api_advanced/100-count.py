@@ -3,9 +3,8 @@
 
 
 def count_words(subreddit, word_list, word_count={}, after=None):
-    """Queries the Reddit API and returns the count of words in
-    word_list in the titles of all the hot posts
-    of the subreddit"""
+    """Recursive function to count occurrences 
+    of keywords in Reddit hot articles."""
     import requests
 
     sub_info = requests.get("https://www.reddit.com/r/{}/hot.json"
