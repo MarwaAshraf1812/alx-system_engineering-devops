@@ -14,7 +14,7 @@ def number_of_subscribers(subreddit):
     try:
         sub_info = requests.get(url, headers=headers, allow_redirects=False)
 
-        if sub_info.status_code >= 300:
+        if sub_info.status_code == 404:
             return 0
 
         # Parse the JSON response and extract the number of subscribers
@@ -22,9 +22,7 @@ def number_of_subscribers(subreddit):
         if data and "subscribers" in data:
             return data["subscribers"]
         else:
-            # Handle the case where the JSON structure is unexpected
             return 0
 
     except requests.RequestException:
-        # Handle any exception that might occur during the request
         return 0
