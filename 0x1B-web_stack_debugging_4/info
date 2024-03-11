@@ -1,3 +1,13 @@
  sudo apt-get update
  apt-cache search apache2
 
+sudo su - holberton
+su: cannot open session: System error
+
+fix this error with :
+>>
+exec {'OS security config':
+  command => '/bin/sh -c "echo <password> | sudo -S sed -i \"s/holberton/foo/\" /etc/security/limits.conf"',
+  path    => '/usr/bin/env/:/bin/:/usr/bin/:/usr/sbin/'
+}
+
