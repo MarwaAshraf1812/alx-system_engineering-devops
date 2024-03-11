@@ -1,0 +1,11 @@
+Install puppet-lint
+    $ apt-get install -y ruby
+    $ gem install puppet-lint -v 2.1.1
+lets install tmux for debugging:
+    $ sudo apt-get install tmux
+start tmux
+    $ tmux
+getting appache pid and strace to see what it's doing when it crashes
+    $ ps aux | grep apache
+    $ sudo strace -p pid
+    $ kill tmux-session
